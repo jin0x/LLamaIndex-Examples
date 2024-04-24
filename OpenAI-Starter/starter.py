@@ -8,6 +8,7 @@ from llama_index.core import (
 )
 from llama_index.llms.ollama import Ollama
 from llama_index.core.node_parser import SentenceSplitter
+from llama_index.core.evaluation import FaithfulnessEvaluator
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,8 +29,13 @@ else:
     storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
     index = load_index_from_storage(storage_context)
 
+# Define the evaluator using the LLM from Settings
+evaluator = FaithfulnessEvaluator(llm=Settings.llm)
 
 # Either way we can now query the index
 query_engine = index.as_query_engine()
 response = query_engine.query("What did the author do growing up?")
 print(response)
+
+eval_result = evaluator.evaluate_response(response=response)
+print(eval_result)
