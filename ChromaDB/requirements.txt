@@ -1,0 +1,3 @@
+llama-index-vector-stores-chroma
+chromadb
+llama-index
