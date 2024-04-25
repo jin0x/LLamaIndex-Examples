@@ -42,4 +42,4 @@ print(response)
 print('\n\n\n')
 
 eval_result = evaluator.evaluate_response(response=response)
-print(eval_result)
+# print(eval_result)
